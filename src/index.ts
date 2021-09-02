@@ -1,32 +1,49 @@
-import express from 'express';
-import { PrismaClient } from '@prisma/client'
+import { createServer } from "http";
+import app from "./app";
+import { config } from "./config";
 
-const app = express();
+(async () => {
+  const server = createServer(app.callback());
 
-const prisma = new PrismaClient();
+  server.listen(config.PORT, () => {
+    console.log(`server running at http://localhost/${config.PORT}`);
+  });
+})();
 
-app.get("/", async (req, res) => {
-  // const user = await prisma.usuario.findMany({
-  //   where: {
-  //     id: 901
-  //   },
-  //   include: {
-  //     lancamento: {
-  //       select: {
-  //         id: true,
-  //         valor: true,
-  //         usuarioId: true,
-  //       }
-  //     }
-  //   }
-  // })
 
-  const user = await prisma.$queryRaw(`select * from usuario`);
 
-  res.send(user);
 
-})
 
-app.listen(5000, () => {
-  console.log("servidor rodando na porta 5000");
-})
+
+
+
+// import { PrismaClient } from '@prisma/client'
+
+// const app = express();
+
+// const prisma = new PrismaClient();
+
+// app.get("/", async (req, res) => {
+//   const user = await prisma.usuario.findMany({
+//     where: {
+//       id: 901
+//     },
+//     include: {
+//       lancamento: {
+//         select: {
+//           id: true,
+//           valor: true,
+//           usuarioId: true,
+//         }
+//       }
+//     }
+//   })
+
+
+//   res.send(user);
+
+// })
+
+// app.listen(5000, () => {
+//   console.log("servidor rodando na porta 5000");
+// })
