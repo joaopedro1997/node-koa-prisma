@@ -1,0 +1,27 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model lancamento {
+  id        Int      @id @default(autoincrement())
+  valor     Float    @db.Float
+  descricao String   @db.VarChar(255)
+  data      DateTime @db.DateTime(0)
+  usuarioId Int?
+  usuario   usuario? @relation(fields: [usuarioId], references: [id])
+
+  @@index([usuarioId], name: "FK_7e33372f34621ac65f4834296dc")
+}
+
+model usuario {
+  id         Int          @id @default(autoincrement())
+  nome       String       @db.VarChar(255)
+  email      String       @db.VarChar(50)
+  status     Int?         @default(1) @db.TinyInt
+  lancamento lancamento[]
+}
