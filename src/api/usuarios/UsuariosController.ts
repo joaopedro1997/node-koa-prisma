@@ -1,20 +1,32 @@
 import { PrismaClient } from "@prisma/client";
 import { RouterContext } from "koa-router";
 
-export const getAllUsers = async (ctx: RouterContext) => {
+const prisma = new PrismaClient();
 
-  const prisma = new PrismaClient();
-
+export const GetAllUsers = async (ctx: RouterContext) => {
   try {
-    const users = await prisma.$queryRaw("select * from usuario")
 
-    await prisma.$disconnect()
-    ctx.body = users;
+    const usuarios = await prisma.usuario.findMany({
+      where: {
+        NOT: {
+          status: 0
+        }
+      },
+      include: {
+        lancamento: {
+          select: {
+            id: true,
+            valor: true,
+            usuarioId: true,
+          }
+        }
+      }
+    });
+
+    ctx.body = usuarios;
 
   } catch (error) {
-
     ctx.status = 500;
     ctx.body = { error };
-
   }
 };

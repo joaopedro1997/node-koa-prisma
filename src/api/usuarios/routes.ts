@@ -1,9 +1,9 @@
 import Router from "koa-router";
-import { getAllUsers } from "./UsuariosController";
+import { GetAllUsers } from "./UsuariosController";
 // import { } from "./UsuariosController";
 
 const router = new Router();
 
-router.get("/api/getAllUsers", getAllUsers);
+router.get("/api/getAllUsers", GetAllUsers);
 
 export { router as routerUsuarios };
