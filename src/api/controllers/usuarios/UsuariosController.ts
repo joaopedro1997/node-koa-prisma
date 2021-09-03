@@ -22,12 +22,12 @@ export const index = async (ctx: RouterContext) => {
 
 export const store = async (ctx: IRouterContext) => {
 
-  const { nome, email }: usuario = ctx.request.body
+  const usuario: usuario = ctx.request.body
 
   try {
 
-    const usuario = await saveUser(email, nome);
-    ctx.body = usuario;
+    const usuarioSalvo = await saveUser(usuario);
+    ctx.body = usuarioSalvo;
 
   } catch (error) {
 
@@ -40,12 +40,12 @@ export const store = async (ctx: IRouterContext) => {
 
 export const update = async (ctx: IRouterContext) => {
 
-  const { nome, email, id }: usuario = ctx.request.body
+  const usuario: usuario = ctx.request.body
 
   try {
 
-    const usuario = await updateUser(email, nome, id);
-    ctx.body = usuario;
+    const usuarioUpdated = await updateUser(usuario);
+    ctx.body = usuarioUpdated;
 
   } catch (error) {
 
@@ -59,12 +59,12 @@ export const update = async (ctx: IRouterContext) => {
 
 export const remove = async (ctx: IRouterContext) => {
 
-  const { id }: usuario = ctx.request.body
+  const usuario: usuario = ctx.request.body
 
   try {
 
-    const usuario = await removeUser(id);
-    ctx.body = usuario;
+    const usuarioRemovido = await removeUser(usuario);
+    ctx.body = usuarioRemovido;
 
   } catch (error) {
 

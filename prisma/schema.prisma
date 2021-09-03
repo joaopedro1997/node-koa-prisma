@@ -8,14 +8,12 @@ datasource db {
 }
 
 model lancamento {
-  id        Int      @id @default(autoincrement())
-  valor     Float    @db.Float
-  descricao String   @db.VarChar(255)
-  data      DateTime @db.DateTime(0)
-  usuarioId Int?
-  usuario   usuario? @relation(fields: [usuarioId], references: [id])
-
-  @@index([usuarioId], name: "FK_7e33372f34621ac65f4834296dc")
+  id         Int      @id @default(autoincrement())
+  valor      Float    @db.Float
+  descricao  String   @db.VarChar(255)
+  data       DateTime @db.DateTime(0)
+  id_usuario Int?
+  usuario    usuario? @relation(fields: [id_usuario], references: [id])
 }
 
 model usuario {

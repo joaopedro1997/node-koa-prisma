@@ -7,6 +7,7 @@ import Router from "koa-router";
 import { createErrorMiddleware } from "koa-yup-validator";
 import path from "path";
 import { routerUsuarios } from './api/controllers/usuarios/usuarios-routes';
+import { routerLancamentos } from './api/controllers/lancamentos/lancamentos-routes';
 
 const app = new koa();
 const routerOpen = new Router();
@@ -40,5 +41,6 @@ app.use((ctx) => {
 });
 
 routerOpen.use(routerUsuarios.routes());
+routerOpen.use(routerLancamentos.routes());
 
 export default app;

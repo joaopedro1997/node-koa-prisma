@@ -17,7 +17,7 @@ export const getAllUsers = async () => {
           select: {
             id: true,
             valor: true,
-            usuarioId: true,
+            id_usuario: true,
           }
         }
       }

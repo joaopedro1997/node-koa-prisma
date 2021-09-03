@@ -1,8 +1,10 @@
-import { PrismaClient, } from "@prisma/client";
+import { PrismaClient, usuario } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-export const removeUser = async (id: number) => {
+export const removeUser = async (usuario: usuario) => {
+
+  const { id } = usuario;
 
   try {
 
