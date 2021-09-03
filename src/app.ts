@@ -4,20 +4,26 @@ import bodyParser from "koa-bodyparser";
 import logger from "koa-logger";
 import serve from "koa-static";
 import Router from "koa-router";
+import { createErrorMiddleware } from "koa-yup-validator";
 import path from "path";
-import { routerUsuarios } from './api/usuarios/routes';
+import { routerUsuarios } from './api/controllers/usuarios/usuarios-routes';
 
 const app = new koa();
-
-app.use(logger());
-app.use(cors({ maxAge: 86400 }));
-app.use(bodyParser());
+const routerOpen = new Router();
 
 const staticDirPath = path.join(__dirname, "public");
 
+app.use(logger());
+
+app.use(cors({ maxAge: 86400 }));
+
+app.use(bodyParser());
+
 app.use(serve(staticDirPath));
 
-const routerOpen = new Router();
+app.use(createErrorMiddleware());
+
+app.use(routerOpen.routes());
 
 routerOpen.get("/", (ctx) => {
   console.log("teste")
@@ -27,9 +33,6 @@ routerOpen.get("/", (ctx) => {
     version: "1.0"
   };
 });
-
-app.use(routerOpen.routes());
-
 
 app.use((ctx) => {
   ctx.body = "Não encontrado";
