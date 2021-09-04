@@ -13,11 +13,11 @@ const postUsuario = yup.object().shape({
 const updateUsuario = yup.object().shape({
   nome: yup.string().required("O Nome é obrigatório"),
   email: yup.string().required("O Email é obrigatório").email("Insira um email válido"),
-  id: yup.number().required("O Id é obrigatório")
+  id: yup.string().required("O Id é obrigatório")
 });
 
 const removeUsuario = yup.object().shape({
-  id: yup.number().required("O Id é obrigatório")
+  id: yup.string().required("O Id é obrigatório")
 });
 
 

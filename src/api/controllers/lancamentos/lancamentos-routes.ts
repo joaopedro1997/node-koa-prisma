@@ -9,7 +9,7 @@ const postLancamento = yup.object().shape({
   valor: yup.number().required("O Valor é obrigatório"),
   descricao: yup.string().required("A Descrição é obrigatório"),
   data: yup.date().required("A Data é obrigatório"),
-  id_usuario: yup.number().required("O id_usuario é obrigatório"),
+  id_usuario: yup.string().required("O id_usuario é obrigatório"),
 });
 
 router.post("/api/lancamentos",
