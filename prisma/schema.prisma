@@ -8,18 +8,19 @@ datasource db {
 }
 
 model lancamento {
-  id         String   @id @default(uuid())
-  valor      Float    @db.DoublePrecision
-  descricao  String   @db.VarChar(255)
-  data       DateTime @db.Date
+  id         String      @id @default(uuid())
+  valor      Float       @db.DoublePrecision
+  descricao  String      @db.VarChar(255)
+  data       DateTime    @db.Date
   id_usuario String?
-  usuario    usuario? @relation(fields: [id_usuario], references: [id])
+  usuario    usuario?    @relation(fields: [id_usuario], references: [id])
 }
 
 model usuario {
   id         String       @id @default(uuid())
-  nome       String       @db.VarChar(255)
+  nome       String       @db.VarChar(100)
   email      String       @db.VarChar(50)
+  password   String       @db.VarChar(255)
   status     Int?         @default(1) @db.SmallInt
   lancamento lancamento[]
 }
