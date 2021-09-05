@@ -12,16 +12,20 @@ export const getAllUsers = async () => {
           status: 0
         }
       },
-      include: {
-        lancamento: {
-          select: {
-            id: true,
+      select: {
+        nome: true,
+        email: true,
+        id: true,
+        lancamento:{
+          select:{
             valor: true,
-            id_usuario: true,
+            descricao: true
           }
         }
       }
     });
+
+    console.log(usuarios)
 
     return usuarios;
 

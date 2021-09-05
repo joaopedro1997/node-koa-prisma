@@ -36,10 +36,6 @@ export const getUser = async (token: string) => {
       id: idUsuario
     }
   });
-  // const usuario = await control("usuarios")
-  //   .select("id", "acessa_agencias")
-  //   .where({ id: idUsuario, status: 1 })
-  //   .first();
 
   return usuario;
 };

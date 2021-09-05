@@ -12,7 +12,7 @@ export const store = async (ctx: IRouterContext) => {
 
     if(lancamentoSalvo === null){
       ctx.status = 404;
-      ctx.body = { message: "Usuário não encontrado "};
+      ctx.body = { message: "Usuário não encontrado" };
       return;
     };
 

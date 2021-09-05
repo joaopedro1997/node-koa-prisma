@@ -37,8 +37,6 @@ routerOpen.get("/", (ctx) => {
   };
 });
 
-
-
 routerOpen.post("/api/auth/login", authLogin);
 
 app.use(routerOpen.routes());
@@ -47,9 +45,7 @@ routerAuth.use(auth);
 
 routerAuth.use(routerUsuarios.routes());
 
-routerOpen.use(routerLancamentos.routes());
-
-
+routerAuth.use(routerLancamentos.routes());
 
 app.use(routerAuth.routes());
 
