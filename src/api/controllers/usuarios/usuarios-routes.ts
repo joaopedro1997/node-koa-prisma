@@ -8,6 +8,7 @@ const router = new Router();
 const postUsuario = yup.object().shape({
   nome: yup.string().required("O Nome é obrigatório"),
   email: yup.string().required("O Email é obrigatório").email("Insira um email válido"),
+  password: yup.string().required("A Senha é obrigatório"),
 });
 
 const updateUsuario = yup.object().shape({
@@ -19,7 +20,6 @@ const updateUsuario = yup.object().shape({
 const removeUsuario = yup.object().shape({
   id: yup.string().required("O Id é obrigatório")
 });
-
 
 router.get("/api/usuarios", index);
 
@@ -37,6 +37,5 @@ router.delete("/api/usuarios",
   validator({ body: removeUsuario }),
   (ctx: any) => remove(ctx)
 );
-
 
 export { router as routerUsuarios };

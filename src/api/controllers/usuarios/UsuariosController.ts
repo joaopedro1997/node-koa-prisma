@@ -35,7 +35,6 @@ export const store = async (ctx: IRouterContext) => {
     ctx.body = { error };
 
   }
-
 }
 
 export const update = async (ctx: IRouterContext) => {
@@ -53,9 +52,7 @@ export const update = async (ctx: IRouterContext) => {
     ctx.body = { error };
 
   }
-
 }
-
 
 export const remove = async (ctx: IRouterContext) => {
 
@@ -72,5 +69,4 @@ export const remove = async (ctx: IRouterContext) => {
     ctx.body = { error };
 
   }
-
 }

@@ -1,6 +1,6 @@
 import { lancamento, usuario } from "@prisma/client";
 import { IRouterContext } from "koa-router";
-import { savelaunch } from "./repositories/save-lancamento-repository";
+import { saveLaunch } from "./repositories/save-lancamento-repository";
 
 export const store = async (ctx: IRouterContext) => {
 
@@ -8,11 +8,11 @@ export const store = async (ctx: IRouterContext) => {
 
   try {
 
-    const lancamentoSalvo = await savelaunch(lancamento);
+    const lancamentoSalvo = await saveLaunch(lancamento);
 
-    if(!lancamentoSalvo){
+    if(lancamentoSalvo === null){
       ctx.status = 404;
-      ctx.body = {message: "Usuário não encontrado."};
+      ctx.body = { message: "Usuário não encontrado "};
       return;
     };
 

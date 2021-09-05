@@ -1,17 +1,10 @@
-import { lancamento, PrismaClient, usuario } from "@prisma/client";
-import { Console } from "console";
-import { resolvePtr } from "dns";
-import { ServerResponse } from "http";
-import { IRouterContext } from "koa-router";
-import { json } from "stream/consumers";
+import { lancamento, PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-export const savelaunch = async (lancamento: lancamento) => {
+export const saveLaunch = async (lancamento: lancamento) => {
 
   const { id_usuario, valor, descricao, data } = lancamento;
-
-  const id_usuario_existe: boolean = false;
 
   try {
 
@@ -21,10 +14,10 @@ export const savelaunch = async (lancamento: lancamento) => {
       }
     });
 
-    if(!usuario){
-      return id_usuario_existe;
+    if(usuario === null){
+      return usuario;
     }
-
+  
     const lancamento = await prisma.lancamento.create({
       data: {
         id_usuario: id_usuario,
@@ -35,10 +28,8 @@ export const savelaunch = async (lancamento: lancamento) => {
     });
 
     return lancamento;
-
+    
   } catch (error) {
-    const teste = error;
-    console.log(error)
-    return teste;
+    return error
   }
 };
