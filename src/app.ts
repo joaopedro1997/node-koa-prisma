@@ -8,9 +8,13 @@ import { createErrorMiddleware } from "koa-yup-validator";
 import path from "path";
 import { routerUsuarios } from './api/controllers/usuarios/usuarios-routes';
 import { routerLancamentos } from './api/controllers/lancamentos/lancamentos-routes';
+import { auth } from './auth/auth';
+import { authLogin } from './api/auth/authLogin';
 
 const app = new koa();
+
 const routerOpen = new Router();
+const routerAuth = new Router();
 
 const staticDirPath = path.join(__dirname, "public");
 
@@ -24,10 +28,8 @@ app.use(serve(staticDirPath));
 
 app.use(createErrorMiddleware());
 
-app.use(routerOpen.routes());
 
 routerOpen.get("/", (ctx) => {
-  console.log("teste")
   ctx.status = 200;
   ctx.body = {
     status: "OK",
@@ -35,12 +37,25 @@ routerOpen.get("/", (ctx) => {
   };
 });
 
+
+
+routerOpen.post("/api/auth/login", authLogin);
+
+app.use(routerOpen.routes());
+
+routerAuth.use(auth);
+
+routerAuth.use(routerUsuarios.routes());
+
+routerOpen.use(routerLancamentos.routes());
+
+
+
+app.use(routerAuth.routes());
+
 app.use((ctx) => {
   ctx.body = "Não encontrado";
   ctx.status = 404;
 });
-
-routerOpen.use(routerUsuarios.routes());
-routerOpen.use(routerLancamentos.routes());
 
 export default app;
